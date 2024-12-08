@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { FaFacebook } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+
 
 
 const Footer = () => {
@@ -6,9 +10,9 @@ const Footer = () => {
         <div>
             <footer className="footer bg-base-200 text-base-content p-10">
                 <aside>
-                    
+
                     <p className="text-xl font-bold">
-                        QuickTask   
+                        QuickTask
                     </p>
                     <p >Turning your time into rewards, one task at a time.</p>
                 </aside>
@@ -25,11 +29,13 @@ const Footer = () => {
                     <a className="link link-hover">Privacy policy</a>
                     <a className="link link-hover">Cookie policy</a>
                 </nav>
-                <nav>
+                <nav className="">
                     <h6 className="footer-title">Socials</h6>
-                    <Link></Link>
-                    <Link></Link>
-                    <Link></Link>
+                    <div className="flex flex-row gap-2 text-xl">
+                        <Link> <FaFacebook /> </Link>
+                        <Link> <FaLinkedin /> </Link>
+                        <Link> <FaInstagram /></Link>
+                    </div>
                 </nav>
             </footer>
         </div>
