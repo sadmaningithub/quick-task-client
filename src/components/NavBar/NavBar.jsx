@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
 
-    
-
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -27,15 +25,17 @@ const NavBar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-52 p-2 shadow">
+                            <li><Link className="btn"> Watch Demo </Link></li>
+                            <li><Link className="btn"> Login</Link></li>
+                            <li><Link className="btn"> Register</Link></li>
                         </ul>
                     </div>
                     <Link className="text-xl font-bold">QuickTask</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        
+
                     </ul>
                 </div>
                 <div className="navbar-end gap-3">

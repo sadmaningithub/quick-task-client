@@ -14,7 +14,7 @@ import { EffectFade,Autoplay, Pagination } from 'swiper/modules';
 
 const Banner = () => {
     return (
-        <div>
+        <div className='mb-20'>
             <Swiper
                 slidesPerView={1}
                 effect={'fade'}
