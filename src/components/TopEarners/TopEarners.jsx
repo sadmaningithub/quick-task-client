@@ -3,7 +3,7 @@ import { FaRegUser } from "react-icons/fa";
 
 const TopEarners = () => {
     return (
-        <div>
+        <div className="mb-24">
             <div>
                 <Title Heading={'Top Earners'} subHeading={'Here are the top 6 earners so far.'}></Title>
             </div>
