@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
 
@@ -18,8 +18,8 @@ const Registration = () => {
         const role = form.role.value;
         const email = form.email.value;
         const password = form.password.value;
-        const user = { name, profilePicture, role, email, password }
-        console.log(user);
+        const userInfo= { name, profilePicture, role, email, coin: 10}
+        // console.log(userToDb);
 
         createUser(email, password)
             .then((userCredential) => {
@@ -35,6 +35,18 @@ const Registration = () => {
                             showConfirmButton: false,
                             timer: 2000
                           });
+
+                          fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                "content-type" : "application/json"
+                            },
+                            body: JSON.stringify(userInfo)
+                          })
+                          .then(res => res.json())
+                          .then(data => {
+                            console.log(data);
+                          })
 
                           navigate('/')
                         // ...
@@ -103,7 +115,7 @@ const Registration = () => {
                                 </label>
                                 <input type="password" placeholder="password" name="password" className="input input-bordered" required />
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    <span className="">Already have an account? <Link className="text-blue-500" to='/login'>login</Link> </span>
                                 </label>
                             </div>
                             <div className="form-control mt-6">
