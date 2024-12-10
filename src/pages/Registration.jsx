@@ -1,37 +1,61 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
 
-    const {createUser} = useContext(AuthContext)
+    const { createUser, updateUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
-    const handleRegistration = e =>{
+    const handleRegistration = e => {
+
         e.preventDefault();
+
         const form = e.target;
         const name = form.name.value;
         const profilePicture = form.profilePicture.value;
         const role = form.role.value;
         const email = form.email.value;
         const password = form.password.value;
-        const user = {name, profilePicture, role, email, password}
+        const user = { name, profilePicture, role, email, password }
         console.log(user);
+
         createUser(email, password)
-        .then((userCredential)=>{
-            const user = userCredential.user;
-            console.log(user);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-            // ..
-          })
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                updateUser(name, profilePicture)
+                    .then(() => {
+                        // Profile updated!
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Registration Successful!",
+                            showConfirmButton: false,
+                            timer: 2000
+                          });
+
+                          navigate('/')
+                        // ...
+                        
+                    }).catch((error) => {
+                        console.log(error);
+                        // An error occurred
+                        // ...
+                    });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                // ..
+            })
 
     }
 
     return (
-        <div>
+        <div className="mb-24">
             <div className="flex flex-col justify-center items-center min-h-screen">
 
                 <div className="flex flex-col items-center max-w-xl w-full ">

@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import AuthProvider from './providers/AuthProvider';
+import Dashboard from './pages/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,13 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: 'dashboard',
+    element: <Dashboard></Dashboard>,
+    children: [{
+      
+    }]
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(

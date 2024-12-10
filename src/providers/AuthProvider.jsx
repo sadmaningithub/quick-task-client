@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import { createContext } from "react";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null)
 
 const auth = getAuth(app);
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
 
-    const createUser = (email, password) =>{
+    const createUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    const updateUser = (name, profilePicture) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: profilePicture
+        })
     }
 
     const signIn = (email, password) => {
@@ -22,19 +28,19 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const logOut = () =>{
+    const logOut = () => {
         setLoading(true)
         return signOut(auth)
     }
 
-    useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             console.log('Current User is:', currentUser);
             setLoading(false)
         })
 
-        return () =>{
+        return () => {
             return unsubscribe;
         }
     }, [])
@@ -43,6 +49,7 @@ const AuthProvider = ({children}) => {
         user,
         loading,
         createUser,
+        updateUser,
         signIn,
         logOut
     }
