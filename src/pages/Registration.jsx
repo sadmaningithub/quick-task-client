@@ -18,6 +18,8 @@ const Registration = () => {
         const role = form.role.value;
         const email = form.email.value;
         const password = form.password.value;
+        
+        
         const userInfo= { name, profilePicture, role, email, coin: 10}
         // console.log(userToDb);
 

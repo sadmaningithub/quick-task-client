@@ -10,7 +10,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import AuthProvider from './providers/AuthProvider';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './layouts/Dashboard';
+import AdminHome from './pages/Dashboard/AdminHome/AdminHome';
+
 
 const router = createBrowserRouter([
   {
@@ -34,9 +36,12 @@ const router = createBrowserRouter([
   {
     path: 'dashboard',
     element: <Dashboard></Dashboard>,
-    children: [{
-      
-    }]
+    children: [
+      {
+        path: 'adminHome',
+        element: <AdminHome></AdminHome>
+      }]
+
   }
 ]);
 
